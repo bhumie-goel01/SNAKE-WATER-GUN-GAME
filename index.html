@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!--
+  SNAKE WATER GUN
+  Developed by Bhumie Goel
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake Water Gun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Toast container -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Confetti -->
+  <div id="confetti" class="confetti-container" aria-hidden="true"></div>
+
+  <!-- NAME SCREEN -->
+  <div id="name-screen">
+    <div class="name-card">
+      <div class="name-card-icons">
+        <div class="icon-pill snake-pill">🐍</div>
+        <div class="icon-pill water-pill">💧</div>
+        <div class="icon-pill gun-pill">🔫</div>
+      </div>
+      <h1 class="name-title">SNAKE WATER GUN</h1>
+      <p class="name-sub">Classic Snake Water Gun Game</p>
+
+      <div id="step-name">
+        <p class="name-label">Enter your name to begin</p>
+        <input id="name-input" class="name-input" type="text"
+               placeholder="Your name..." maxlength="20" autocomplete="off" />
+        <button id="start-btn" class="btn-primary">LET'S PLAY ▶</button>
+      </div>
+
+      <div id="step-continue" class="hidden">
+        <div class="continue-box">
+          <p class="continue-greeting">Welcome back, <strong id="continue-name"></strong>!</p>
+          <div class="continue-stats">
+            <span>🏆 <span id="cont-wins">0</span> Wins</span>
+            <span>❌ <span id="cont-losses">0</span> Losses</span>
+            <span>🎮 <span id="cont-total">0</span> Played</span>
+          </div>
+        </div>
+        <button id="continue-btn" class="btn-primary">▶ Continue Progress</button>
+        <button id="new-from-continue-btn" class="btn-outline">🆕 Start Fresh</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="game-screen" class="hidden">
+
+    <header id="main-header">
+      <div class="header-left">
+        <div class="logo-text">SNAKE WATER GUN</div>
+      </div>
+
+      <div class="header-profile">
+        <div class="profile-side">
+          <span class="profile-icon">👤</span>
+          <span class="profile-name player-name" id="profile-player">PLAYER</span>
+        </div>
+        <span class="profile-vs">VS</span>
+        <div class="profile-side">
+          <span class="profile-name cpu-name">CPU</span>
+          <span class="profile-icon">🤖</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="save-btn"        class="hdr-btn" title="Save Progress">💾</button>
+        <button id="new-btn"         class="hdr-btn" title="New Game (N)">🆕</button>
+        <button id="rules-btn"       class="hdr-btn" title="Rules">📖</button>
+        <button id="sound-btn"       class="hdr-btn" title="Sound (M)">🔊</button>
+        <button id="theme-btn"       class="hdr-btn" title="Theme">☀️</button>
+        <button id="change-name-btn" class="hdr-btn" title="Change Name">✏️</button>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- Choose Weapon -->
+      <section class="choice-section">
+        <p class="section-label">⚡ Choose Your Weapon</p>
+        <div class="choice-grid">
+          <button class="choice-btn" data-choice="snake">
+            <div class="choice-ring snake-ring">
+              <span class="choice-emoji">🐍</span>
+            </div>
+            <span class="choice-name">SNAKE</span>
+          </button>
+          <button class="choice-btn" data-choice="water">
+            <div class="choice-ring water-ring">
+              <span class="choice-emoji">💧</span>
+            </div>
+            <span class="choice-name">WATER</span>
+          </button>
+          <button class="choice-btn" data-choice="gun">
+            <div class="choice-ring gun-ring">
+              <span class="choice-emoji">🔫</span>
+            </div>
+            <span class="choice-name">GUN</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Result -->
+      <section>
+        <div id="result-area" class="result-area">
+          <div id="result-content">
+            <p class="result-placeholder">Choose your weapon above to begin!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section>
+        <p class="section-label">📊 Statistics</p>
+        <div class="stats-grid">
+          <div class="stat-card s-wins">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-value" id="s-wins">0</div>
+            <div class="stat-label">Wins</div>
+          </div>
+          <div class="stat-card s-losses">
+            <div class="stat-icon">❌</div>
+            <div class="stat-value" id="s-losses">0</div>
+            <div class="stat-label">Losses</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🤝</div>
+            <div class="stat-value" id="s-draws">0</div>
+            <div class="stat-label">Draws</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🎮</div>
+            <div class="stat-value" id="s-total">0</div>
+            <div class="stat-label">Total</div>
+          </div>
+          <div class="stat-card s-rate">
+            <div class="stat-icon">📈</div>
+            <div class="stat-value" id="s-rate">N/A</div>
+            <div class="stat-label">Win Rate</div>
+          </div>
+          <div class="stat-card s-streak">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-value" id="s-streak">0</div>
+            <div class="stat-label">Streak</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🚀</div>
+            <div class="stat-value" id="s-best">0</div>
+            <div class="stat-label">Best</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <section class="action-row">
+        <button id="save-btn2" class="btn-action btn-save">💾 Save</button>
+        <button id="new-btn2"  class="btn-action btn-new">🆕 New Game</button>
+        <button id="reset-btn" class="btn-action btn-danger">🔄 Restart</button>
+      </section>
+
+      <!-- Match History -->
+      <section class="history-section">
+        <div class="history-header">
+          <p class="section-label">📋 Match History <span id="hist-count" class="hist-count"></span></p>
+          <select id="hist-filter" class="hist-select">
+            <option value="all">All</option>
+            <option value="win">Wins</option>
+            <option value="lose">Losses</option>
+            <option value="draw">Draws</option>
+          </select>
+        </div>
+        <div class="history-wrap">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>You</th>
+                <th>Computer</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody id="history-body">
+              <tr><td colspan="4" class="hist-empty">No matches yet. Start playing!</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      Developed by <strong>Bhumie Goel</strong>
+    </footer>
+
+  </div>
+
+  <!-- RULES MODAL -->
+  <div id="rules-modal" class="modal-overlay">
+    <div class="modal glass-modal">
+      <button class="modal-x" id="modal-close">✕</button>
+
+      <div class="modal-header">
+        <div class="modal-title-icon">📖</div>
+        <h2 class="modal-title">Game Rules</h2>
+      </div>
+
+      <div class="modal-rules">
+        <div class="rule-card">
+          <div class="rule-left"><span class="rule-big-emoji">🐍</span></div>
+          <div class="rule-mid">beats</div>
+          <div class="rule-right">
+            <span class="rule-big-emoji">💧</span>
+            <span class="rule-desc">Snake drinks Water</span>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-left"><span class="rule-big-emoji">💧</span></div>
+          <div class="rule-mid">beats</div>
+          <div class="rule-right">
+            <span class="rule-big-emoji">🔫</span>
+            <span class="rule-desc">Water drowns Gun</span>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-left"><span class="rule-big-emoji">🔫</span></div>
+          <div class="rule-mid">beats</div>
+          <div class="rule-right">
+            <span class="rule-big-emoji">🐍</span>
+            <span class="rule-desc">Gun kills Snake</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-shortcuts">
+        <p class="shortcut-title">⌨️ Keyboard Shortcuts</p>
+        <div class="shortcut-row"><kbd>S</kbd><span>Snake</span></div>
+        <div class="shortcut-row"><kbd>W</kbd><span>Water</span></div>
+        <div class="shortcut-row"><kbd>G</kbd><span>Gun</span></div>
+        <div class="shortcut-row"><kbd>N</kbd><span>New Game</span></div>
+        <div class="shortcut-row"><kbd>M</kbd><span>Mute / Unmute</span></div>
+      </div>
+
+      <button id="modal-close-btn" class="modal-got-it">Got it!</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
