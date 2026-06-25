@@ -20,4 +20,18 @@ This project reflects both my programming fundamentals and my ability to effecti
 * Modern dark and light theme support.
 * Simple and beginner-friendly design suitable for players of all ages.
 
+# WHAT I LEARNED
+While working on the project, I learnt:
 
+* Implementing game logic in Python.
+* Designing the frontend with the help of AI tools
+* Applying concepts such as loops, dictionaries, functions, and conditional statements.
+* Testing, debugging, and improving web applicationa and making them reliability.
+* Managing projects using Git and GitHub.
+* Combining traditional programming skills with AI-assisted development workflows.
+
+# CONCLUSION
+This project allowed me to understand the logic of tyhe code, write it, then design the frontend using AI and evolve it into a feature-rich web application. Along the way, I strengthened my programming foundations, improved my debugging skills, and gained practical experience working with modern development tools. It represents an important milestone in my journey and serves as a reflection of both my technical growth and willingness to learn new technologies.
+
+# DEVELOPED BY
+*Bhumie Goel*
